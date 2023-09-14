@@ -19,6 +19,7 @@ import (
 	"flag"
 	"os"
 	"sync"
+	"time"
 
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/fields"
@@ -46,6 +47,8 @@ type routeOperatorFlags struct {
 	mtu      int
 	vtepPort int
 }
+
+var syncPeriod = time.Minute
 
 func addRouteOperatorFlags(liqonet *routeOperatorFlags) {
 	flag.IntVar(&liqonet.vni, "route.vxlan-vni", 18952, "VXLAN Virtual Network Identifier (VNI) for the Liqonet intra-cluster overlay network")
@@ -116,6 +119,7 @@ func runRouteOperator(commonFlags *liqonetCommonFlags, routeFlags *routeOperator
 			}
 			return cache.New(config, opts)
 		},
+		SyncPeriod: &syncPeriod,
 	})
 	if err != nil {
 		klog.Errorf("unable to get manager: %s", err)
@@ -141,6 +145,7 @@ func runRouteOperator(commonFlags *liqonetCommonFlags, routeFlags *routeOperator
 			}
 			return cache.New(config, opts)
 		},
+		SyncPeriod: &syncPeriod,
 	})
 	if err != nil {
 		klog.Errorf("unable to get manager: %s", err)
