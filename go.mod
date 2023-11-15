@@ -19,7 +19,7 @@ require (
 	github.com/julienschmidt/httprouter v1.3.0
 	github.com/mattn/go-isatty v0.0.20
 	github.com/metal-stack/go-ipam v1.11.3
-	github.com/miekg/dns v1.1.50
+	github.com/miekg/dns v1.1.57
 	github.com/mittwald/go-helm-client v0.12.3
 	github.com/onsi/ginkgo/v2 v2.13.1
 	github.com/onsi/gomega v1.30.0
